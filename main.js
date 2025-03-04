@@ -3,7 +3,8 @@ const canvasContext = canvas.getContext('2d');
 const displayInputCheckbox = document.getElementById('displayInputCheckbox');
 const frames = 347;
 const keysPressed = {};
-const correctInputs = [[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0]
+const correctInputs =
+[[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0]
 ,[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0]
 ,[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0]
 ,[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,1,1,0,0,0,0,0],[0,1,1,0,0,0,0,0],[0,1,1,0,0,0,0,0],[0,1,1,0,0,0,0,0]
@@ -356,7 +357,7 @@ function DrawImage(canvas, ctx, image)
 
 function DrawText(canvas, ctx, text, x, y)
 {
-	ctx.font = '80px Arial';
+	ctx.font = '45px Arial';
 	ctx.fillStyle = 'White';
 	ctx.strokeStyle = 'Black';
 	ctx.textAlign = 'center';
