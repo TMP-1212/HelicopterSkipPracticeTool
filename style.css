@@ -1,0 +1,59 @@
+canvas
+{
+    margin: auto;
+    display: block;
+}
+
+div
+{
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+p
+{
+	font-size: 1vw;
+}
+
+.smallText
+{
+	font-size: 0.65vw;
+}
+
+.bigText
+{
+	font-size: 1.25vw;
+}
+
+.loadingText
+{
+	font-size: 8vw;
+}
+
+.hoverReveal:hover + .hidden
+{
+	display: block;
+}
+
+.hidden
+{
+	display: none;
+}
+
+input
+{
+	width: 2vw;
+	height: 1vh;
+}
+
+button
+{
+	width: min(2vw, 2vh);
+	height: min(2vw, 2vh);
+}
+
+.noOutline
+{
+	outline: none;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<p class="loadingText" id="loadingText">Loading...</p>
+	<canvas class="noOutline"></canvas>
+	<div>
+		<p>Save state:</p>
+		<input type="text" id="saveState">
+		<button onclick="LoadSaveState()"></button>
+		<p class="smallText hoverReveal">(?)</p>
+		<p class="smallText hidden">(The frame to start from. Minimum is 1 and maximum is 347.)</p>
+	</div>
+	<details class="smallText">
+		<summary class="noOutline">Pre-made Save states</summary>
+		<ul>
+			<li>First input: 1</li>
+			<li>Jump and eject: 90</li>
+			<li>Move arm and grab: 160</li>
+			<li>First 2 mid-air inputs: 208</li>
+			<li>Last input: 250</li>
+		</ul>
+	</details>
+	<div>
+		<p>Framerate:</p>
+		<input type="text" id="framerate">
+		<button onclick="SetFramerate()"></button>
+		<p class="smallText hoverReveal">(?)</p>
+		<p class="smallText hidden">(Minimum is 1, maximum is 60, default is 30. If you set the framerate to 1, you may need to hold the buttons for a full second before they register.)</p>
+	</div>
+	<div>
+	<input type="checkbox" id="displayInputCheckbox" checked>
+	<p class="smallText">Display input message</p>
+	<p class="smallText hoverReveal">(?)</p>
+	<p class="smallText hidden">Uncheck this to remove the messages "Failed input on this frame - Press R to restart" and "Victory! - Press R to restart". The simulation will still pause on failed inputs and victory.</p>
+	</div>
+	<fieldset>
+		<legend class="bigText">What is this?</legend>
+		<p class="smallText">This is a practice tool that simulates the Helicopter Skip strategy in the Happy Wheels level "Dawn of the Dead.lv1". It was built from 347 screenshots of the level being played in the flash demo of the real game. This tool allows for better practice through its added features that aren't available in the real game. These features include save states for retrying specific scenarios instantly, custom framerate for slowing down or speeding up the simulation, and pausing on failed inputs to see exactly what frame the error occurred on.</p>
+	</fieldset>
+	<fieldset>
+		<legend class="bigText">Resources</legend>
+		<p class="smallText">Play the official game here: <a href="https://totaljerkface.com/happy_wheels.tjf" target="_blank">totaljerkface.com/happy_wheels.tjf</a></p>
+		<p class="smallText">Helicopter Skip demonstration: <a href="https://youtu.be/Etp6BfzYcws" target="_blank">youtu.be/Etp6BfzYcws</a></p>
+		<p class="smallText">How to use this tool + Helicopter Skip tutorial: <a href="https://youtu.be/_G3eW3EKRTs" target="_blank">youtu.be/_G3eW3EKRTs</a></p>		
+	</fieldset>
+	<fieldset>
+		<legend class="bigText">Disclaimer</legend>
+		<p class="smallText">This is a fan-made practice tool of the game Happy Wheels. It is not affiliated with, endorsed by, or associated with Fancy Force, LLC in any way. All trademarks, copyrights, and intellectual property belong to their respective owners. This project is entirely non-commercial.</p>
+	</fieldset>
+	<script src='main.js'></script>
+</body>
+</html>
