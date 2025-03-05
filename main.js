@@ -3,8 +3,7 @@ const canvasContext = canvas.getContext('2d');
 const displayInputCheckbox = document.getElementById('displayInputCheckbox');
 const frames = 347;
 const keysPressed = {};
-const correctInputs =
-[[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0]
+const correctInputs = [[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0]
 ,[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0]
 ,[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0]
 ,[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,1,1,0,0,0,0,0],[0,1,1,0,0,0,0,0],[0,1,1,0,0,0,0,0],[0,1,1,0,0,0,0,0]
@@ -137,6 +136,7 @@ PreloadImages()
 	})
 	.catch(err =>
 		{
+			document.getElementById("loadingText").textContent="Failed to load";
 			console.log('image failed to load');
 		});
 
@@ -333,13 +333,19 @@ function SetFramerate()
 function PreloadImages()
 {
 	var promises = [];
+	var imagesLoaded = 0;
 	for (let i = 1; i <= frames; i++)
 	{
 		promises.push(new Promise((resolve, reject) =>
 		{
 		var img = new Image();
 		img.src = `images/${i}.png`;
-		img.onload = () => resolve({index: i, image: img});
+		img.onload = () =>
+		{
+			imagesLoaded++;
+			document.getElementById("loadingText").textContent = "Loading... (" + imagesLoaded + "/" + frames + ")";
+			resolve({index: i, image: img});
+		}
 		img.onerror = reject;
 		}));
 	}
