@@ -45,6 +45,7 @@ input
 {
 	width: 2vw;
 	height: 1vh;
+	font-size: min(1vw, 1vh);
 }
 
 button
