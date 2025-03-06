@@ -26,6 +26,11 @@ p
 	font-size: 1.35vw;
 }
 
+.largeText
+{
+	font-size: 4vw;
+}
+
 .loadingText
 {
 	font-size: 8vw;
