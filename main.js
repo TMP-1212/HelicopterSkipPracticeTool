@@ -3,7 +3,8 @@ const canvasContext = canvas.getContext('2d');
 const displayInputCheckbox = document.getElementById('displayInputCheckbox');
 const frames = 347;
 const keysPressed = {};
-const correctInputs = [[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0]
+const correctInputs =
+[[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0]
 ,[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0]
 ,[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0]
 ,[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,1,1,0,0,0,0,0],[0,1,1,0,0,0,0,0],[0,1,1,0,0,0,0,0],[0,1,1,0,0,0,0,0]
@@ -136,7 +137,10 @@ PreloadImages()
 	})
 	.catch(err =>
 		{
-			document.getElementById("loadingText").textContent="Failed to load";
+			var failedToLoadText = document.createElement("p");
+			failedToLoadText.className = "largeText";
+			failedToLoadText.textContent = "Failed to load. Try refreshing the website.";
+			document.body.insertBefore(failedToLoadText, document.body.firstChild);
 			console.log('image failed to load');
 		});
 
