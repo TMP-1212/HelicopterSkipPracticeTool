@@ -1,7 +1,9 @@
 const canvas = document.querySelector('canvas');
 const canvasContext = canvas.getContext('2d');
-const displayInputCheckbox = document.getElementById('displayInputCheckbox');
+const displayRestartCheckbox = document.getElementById('displayRestartCheckbox');
+const displayInputFeedbackCheckbox = document.getElementById('displayInputFeedbackCheckbox');
 const frames = 347;
+const totalImages = frames + 8;
 const keysPressed = {};
 const correctInputs =
 [[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,1,0,0,0,0,0]
@@ -42,16 +44,16 @@ const correctInputs =
 ,[0,0,0,1,1,0,0,0],[0,0,0,1,1,0,0,0],[0,0,0,1,1,0,0,0],[0,0,0,1,1,0,0,0],[0,0,0,1,1,0,0,0],[0,0,0,1,0,0,0,0]
 ,[0,0,0,1,0,0,0,0],[0,0,0,1,0,0,0,0],[0,0,0,1,0,0,0,0],[0,0,0,1,0,0,0,0],[0,0,0,1,0,0,0,0],[0,0,0,1,0,0,0,0]
 ,[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]
-,[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0]
-,[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0]
-,[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0]
-,[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0]
-,[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0]
-,[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0]
-,[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0]
-,[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0]
-,[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0]
-,[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]
+,[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0]
+,[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0]
+,[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0]
+,[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0]
+,[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0]
+,[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0]
+,[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0]
+,[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0]
+,[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0]
+,[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]
 ,[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]
 ,[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]
 ,[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]
@@ -73,9 +75,13 @@ var frameLength = 1000 / fps;
 var lastTickTime = Date.now();
 var currentTime = Date.now();
 var currentFrame = 1;
-var images = {};
+var levelImages = {};
+var keyboardImages = {};
+var imagesLoaded = 0;
 var saveState = 1;
+var displayRestartMessage = true;
 var displayInput = true;
+var lastInput = [0,0,0,0,0,0,0,0]
 
 // prevents keyboard from scrolling
 window.addEventListener('keydown', function(event)
@@ -109,9 +115,21 @@ document.addEventListener('click', function(event)
 	}
 });
 
-displayInputCheckbox.addEventListener('change', function()
+displayRestartCheckbox.addEventListener('change', function()
 {
-	if (displayInputCheckbox.checked)
+	if(displayRestartCheckbox.checked)
+	{
+		displayRestartMessage = true;
+	}
+	else
+	{
+		displayRestartMessage = false;
+	}
+});
+
+displayInputFeedbackCheckbox.addEventListener('change', function()
+{
+	if(displayInputFeedbackCheckbox.checked)
 	{
 		displayInput = true;
 	}
@@ -121,28 +139,7 @@ displayInputCheckbox.addEventListener('change', function()
 	}
 });
 
-PreloadImages()
-	.then(results =>
-	{
-		results.forEach(({index, image}) =>
-		{
-			images[index] = image;
-		});
-	document.getElementById("loadingText").remove();
-	canvas.width = images[currentFrame].width;
-	canvas.height = images[currentFrame].height;
-	canvas.tabIndex = 0;
-	canvas.focus();
-	GameLoop();
-	})
-	.catch(err =>
-		{
-			var failedToLoadText = document.createElement("p");
-			failedToLoadText.className = "largeText";
-			failedToLoadText.textContent = "Failed to load. Try refreshing the website.";
-			document.body.insertBefore(failedToLoadText, document.body.firstChild);
-			console.log('image failed to load');
-		});
+StartGame();
 
 function GameLoop()
 {
@@ -163,7 +160,7 @@ function Update()
 	if(document.activeElement === canvas)
 	{	
 		var actualInput = GetInput();
-		var fixedInput = FixInput(actualInput);
+		var fixedInput = FixInput(actualInput.slice());
 		switch(gameState)
 		{
 			case state.RUNNING:
@@ -172,6 +169,7 @@ function Update()
 					gameState = state.RESULT;
 					break;
 				}
+				lastInput = actualInput;
 				if(!CompareArrays(fixedInput, correctInputs[currentFrame - 1]))
 				{
 					gameState = state.RESULT;
@@ -203,23 +201,104 @@ function Update()
 
 function Draw()
 {
-	DrawImage(canvas, canvasContext, images[currentFrame]);
+	DrawImage(canvas, canvasContext, levelImages[currentFrame], 0, 0);	
 	if(document.activeElement !== canvas)
 	{
 		DrawText(canvas, canvasContext, 'Simulation paused - Click to resume', canvas.width/2, canvas.height/2);
 	}
-	if(gameState == state.RESULT && displayInput)
+	if(gameState == state.RESULT)
 	{
 		if(currentFrame >= frames)
 		{
-			DrawText(canvas, canvasContext, 'Victory! - Press R to restart', canvas.width/2, canvas.height/1.1);
+			if(displayRestartMessage)
+			{
+				DrawText(canvas, canvasContext, 'Victory! - Press R to restart', canvas.width/2, canvas.height/1.1);
+
+			}
 		}
 		else
 		{
-			DrawText(canvas, canvasContext, 'Failed input on this frame - Press R to restart', canvas.width/2, canvas.height/1.1);
+			if(displayRestartMessage)
+			{
+				DrawText(canvas, canvasContext, 'Failed input on this frame - Press R to restart', canvas.width/2, canvas.height/1.1);
+			}			
+			if(displayInput)
+			{
+				DrawText(canvas, canvasContext, 'Input:', canvas.width/16.75, canvas.height/17.75);
+				DrawText(canvas, canvasContext, 'Want:', canvas.width/1.78, canvas.height/17.75);
+				DrawPlayerInput(canvas, canvasContext);
+				DrawCorrectInput(canvas, canvasContext);
+			}
 		}	
 	}
 }
+
+function StartGame()
+{
+	var levelImagePaths = [];
+	for(var i = 1; i <= frames; i++)
+	{
+		levelImagePaths.push(`level_images/${i}.png`);
+	}
+	var keyboardImagePaths =
+	["keyboard_images/Left.png", "keyboard_images/Right.png", "keyboard_images/Up.png", "keyboard_images/Down.png"
+	, "keyboard_images/Space.png", "keyboard_images/Shift.png", "keyboard_images/Ctrl.png", 	"keyboard_images/Z.png"];
+	
+	Promise.all([
+	PreloadImages(levelImagePaths),
+	PreloadImages(keyboardImagePaths)
+		])
+		.then(([levelImageResults, keyboardImageResults]) =>
+		{
+			levelImageResults.forEach(({index, image}) =>
+			{
+				levelImages[index+1] = image;
+			});
+			keyboardImageResults.forEach(({index, image}) =>
+			{
+				keyboardImages[index] = image;
+			});
+		document.getElementById("loadingText").remove();
+		canvas.width = levelImages[currentFrame].width;
+		canvas.height = levelImages[currentFrame].height;
+		canvas.tabIndex = 0;
+		canvas.focus();
+		GameLoop();
+		})
+		.catch(err =>
+			{
+				var failedToLoadText = document.createElement("p");
+				failedToLoadText.className = "largeText";
+				failedToLoadText.textContent = "Failed to load. Try refreshing the website.";
+				document.body.insertBefore(failedToLoadText, document.body.firstChild);
+				console.log('image failed to load');
+			});
+}
+
+function DrawPlayerInput(canvas, canvasContext)
+{
+	DrawImage(canvas, canvasContext, keyboardImages[5], canvas.width * 0.120, canvas.height * 0.0143, 0.5, (lastInput[5]) ? 1 : 0.4);
+	DrawImage(canvas, canvasContext, keyboardImages[7], canvas.width * 0.198, canvas.height * 0.0143, 0.5, (lastInput[7]) ? 1 : 0.4);
+	DrawImage(canvas, canvasContext, keyboardImages[2], canvas.width * 0.434, canvas.height * 0.0143, 0.5, (lastInput[2]) ? 1 : 0.4);
+	DrawImage(canvas, canvasContext, keyboardImages[6], canvas.width * 0.120, canvas.height * 0.0578, 0.5, (lastInput[6]) ? 1 : 0.4);
+	DrawImage(canvas, canvasContext, keyboardImages[4], canvas.width * 0.252, canvas.height * 0.0578, 0.5, (lastInput[4]) ? 1 : 0.4);
+	DrawImage(canvas, canvasContext, keyboardImages[0], canvas.width * 0.404, canvas.height * 0.0578, 0.5, (lastInput[0]) ? 1 : 0.4);
+	DrawImage(canvas, canvasContext, keyboardImages[3], canvas.width * 0.434, canvas.height * 0.0578, 0.5, (lastInput[3]) ? 1 : 0.4);
+	DrawImage(canvas, canvasContext, keyboardImages[1], canvas.width * 0.463, canvas.height * 0.0578, 0.5, (lastInput[1]) ? 1 : 0.4);
+}
+
+function DrawCorrectInput(canvas, canvasContext)
+{
+	DrawImage(canvas, canvasContext, keyboardImages[5], canvas.width * 0.624, canvas.height * 0.0143, 0.5, (correctInputs[currentFrame - 1][5]) ? 1 : 0.4);
+	DrawImage(canvas, canvasContext, keyboardImages[7], canvas.width * 0.702, canvas.height * 0.0143, 0.5, (correctInputs[currentFrame - 1][7]) ? 1 : 0.4);
+	DrawImage(canvas, canvasContext, keyboardImages[2], canvas.width * 0.938, canvas.height * 0.0143, 0.5, (correctInputs[currentFrame - 1][2]) ? 1 : 0.4);
+	DrawImage(canvas, canvasContext, keyboardImages[6], canvas.width * 0.624, canvas.height * 0.0578, 0.5, (correctInputs[currentFrame - 1][6]) ? 1 : 0.4);
+	DrawImage(canvas, canvasContext, keyboardImages[4], canvas.width * 0.756, canvas.height * 0.0578, 0.5, (correctInputs[currentFrame - 1][4]) ? 1 : 0.4);
+	DrawImage(canvas, canvasContext, keyboardImages[0], canvas.width * 0.908, canvas.height * 0.0578, 0.5, (correctInputs[currentFrame - 1][0]) ? 1 : 0.4);
+	DrawImage(canvas, canvasContext, keyboardImages[3], canvas.width * 0.938, canvas.height * 0.0578, 0.5, (correctInputs[currentFrame - 1][3]) ? 1 : 0.4);
+	DrawImage(canvas, canvasContext, keyboardImages[1], canvas.width * 0.967, canvas.height * 0.0578, 0.5, (correctInputs[currentFrame - 1][1]) ? 1 : 0.4);
+}
+
 
 function FixInput(input)
 {
@@ -256,15 +335,15 @@ function FixInput(input)
 			newInput[1] = 0;
 		}
 	}
-	// doesn't matter what arrow key you use mid-air. comparison inputs presses all
+	// doesn't matter what arrow key you use mid-air. comparison inputs presses left
 	if(currentFrame > 232)
 	{
 		if(newInput[0] || newInput[1] || newInput[2] || newInput[3])
 		{
 			newInput[0] = 1;
-			newInput[1] = 1;
-			newInput[2] = 1;
-			newInput[3] = 1;
+			newInput[1] = 0;
+			newInput[2] = 0;
+			newInput[3] = 0;
 		}
 	}
 	// inputs no longer matter
@@ -334,39 +413,40 @@ function SetFramerate()
 	}
 }
 
-function PreloadImages()
+function PreloadImages(imageFilePaths)
 {
 	var promises = [];
-	var imagesLoaded = 0;
-	for (let i = 1; i <= frames; i++)
+	for(let i = 0; i < imageFilePaths.length; i++)
 	{
 		promises.push(new Promise((resolve, reject) =>
 		{
-		var img = new Image();
-		img.src = `images/${i}.png`;
-		img.onload = () =>
-		{
-			imagesLoaded++;
-			document.getElementById("loadingText").textContent = "Loading... (" + imagesLoaded + "/" + frames + ")";
-			resolve({index: i, image: img});
-		}
+			var img = new Image();
+			img.src = imageFilePaths[i];
+			img.onload = () =>
+			{
+				imagesLoaded++;
+				document.getElementById("loadingText").textContent = "Loading... (" + Math.trunc(imagesLoaded/totalImages*100) + "%" + ")";
+				resolve({index: i, image: img});
+			}
 		img.onerror = reject;
 		}));
 	}
 	return Promise.all(promises);
 }
 
-function DrawImage(canvas, ctx, image)
+function DrawImage(canvas, ctx, image, x, y, scale = 1, alpha = 1)
 {
 	if(image === undefined)
 	{
 		return;
-	}        
-        ctx.drawImage(image, 0, 0);
+	}
+	ctx.globalAlpha = alpha;
+        ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
 }
 
-function DrawText(canvas, ctx, text, x, y)
+function DrawText(canvas, ctx, text, x, y, alpha = 1)
 {
+	ctx.globalAlpha = alpha;
 	ctx.font = '45px Arial';
 	ctx.fillStyle = 'White';
 	ctx.strokeStyle = 'Black';

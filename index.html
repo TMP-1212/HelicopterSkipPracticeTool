@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<p class="loadingText" id="loadingText">Loading... (0/347)</p>
+	<p class="loadingText" id="loadingText">Loading... (0%)</p>
 	<canvas class="noOutline"></canvas>
 	<div>
 		<p>Save state:</p>
@@ -31,10 +31,16 @@
 		<p class="smallText hidden">(Minimum is 1, maximum is 60, default is 30. If you set the framerate to 1, you may need to hold the buttons for a full second before they register.)</p>
 	</div>
 	<div>
-	<input type="checkbox" id="displayInputCheckbox" checked>
-	<p class="smallText">Display input message</p>
+	<input type="checkbox" id="displayRestartCheckbox" checked>
+	<p class="smallText">Display result message</p>
 	<p class="smallText hoverReveal">(?)</p>
 	<p class="smallText hidden">Uncheck this to remove the messages "Failed input on this frame - Press R to restart" and "Victory! - Press R to restart". The simulation will still pause on failed inputs and victory.</p>
+	</div>
+	<div>
+	<input type="checkbox" id="displayInputFeedbackCheckbox" checked>
+	<p class="smallText">Display input feedback</p>
+	<p class="smallText hoverReveal">(?)</p>
+	<p class="smallText hidden">Uncheck this to remove the input comparison on failed inputs.</p>
 	</div>
 	<fieldset>
 		<legend class="bigText">What is this?</legend>
@@ -45,6 +51,7 @@
 		<p class="smallText">Play the official game here: <a href="https://totaljerkface.com/happy_wheels.tjf" target="_blank">totaljerkface.com/happy_wheels.tjf</a></p>
 		<p class="smallText">Helicopter Skip demonstration: <a href="https://youtu.be/Etp6BfzYcws" target="_blank">youtu.be/Etp6BfzYcws</a></p>
 		<p class="smallText">How to use this tool + Helicopter Skip tutorial: <a href="https://youtu.be/_G3eW3EKRTs" target="_blank">youtu.be/_G3eW3EKRTs</a></p>
+		<p class="smallText">GitHub repository: <a href="https://github.com/TMP-1212/HelicopterSkipPracticeTool" target="_blank">https://github.com/TMP-1212/HelicopterSkipPracticeTool</a></p>
 		<p class="smallText">For bugs/problems/feature requests/anything regarding this website, you can DM me on discord: @tmp1212</p>		
 	</fieldset>
 	<fieldset>
