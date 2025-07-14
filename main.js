@@ -86,7 +86,7 @@ let lastInput = [0,0,0,0,0,0,0,0]
 // prevents keyboard from scrolling
 window.addEventListener('keydown', function(event)
 {
-	if (event.key === " " || event.key === "ArrowUp" || event.key === "ArrowDown" || event.key === "ArrowLeft" || 	event.key === "ArrowRight")
+	if(event.key === " " || event.key === "ArrowUp" || event.key === "ArrowDown" || event.key === "ArrowLeft" || 	event.key === "ArrowRight")
 	{
 		event.preventDefault();
 	}
@@ -146,7 +146,7 @@ function Update()
 	if(document.activeElement === canvas)
 	{	
 		let actualInput = GetInput();
-		let fixedInput = FixInput(actualInput.slice());
+		let fixedInput = FixInput(actualInput);
 		switch(gameState)
 		{
 			case state.RUNNING:
@@ -228,7 +228,7 @@ function StartGame()
 	}
 	let keyboardImagePaths =
 	["keyboard_images/Left.png", "keyboard_images/Right.png", "keyboard_images/Up.png", "keyboard_images/Down.png"
-	, "keyboard_images/Space.png", "keyboard_images/Shift.png", "keyboard_images/Ctrl.png", 	"keyboard_images/Z.png"];
+	, "keyboard_images/Space.png", "keyboard_images/Shift.png", "keyboard_images/Ctrl.png", "keyboard_images/Z.png"];
 	
 	Promise.all([
 	PreloadImages(levelImagePaths),
@@ -287,7 +287,7 @@ function DrawCorrectInput(canvas, canvasContext)
 
 function FixInput(input)
 {
-	let newInput = input;
+	let newInput = input.slice();
 	// if left and right pressed
 	if(newInput[0] && newInput[1])
 	{
@@ -320,7 +320,7 @@ function FixInput(input)
 			newInput[1] = 0;
 		}
 	}
-	// doesn't matter what arrow key you use mid-air. comparison inputs presses left
+	// doesn't matter what arrow key you use mid-air. comparison inputs press left
 	if(currentFrame > 232)
 	{
 		if(newInput[0] || newInput[1] || newInput[2] || newInput[3])
@@ -426,7 +426,7 @@ function DrawImage(canvas, ctx, image, x, y, scale = 1, alpha = 1)
 		return;
 	}
 	ctx.globalAlpha = alpha;
-        ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
+	ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
 }
 
 function DrawText(canvas, ctx, text, x, y, alpha = 1)
@@ -447,7 +447,7 @@ function CompareArrays(arr1, arr2)
 	{
 		return false;
 	}
-	if (arr1.length !== arr2.length)
+	if(arr1.length !== arr2.length)
 	{
 	return false;
 	}
@@ -458,5 +458,5 @@ function CompareArrays(arr1, arr2)
 		return false;
 		}
 	}
-return true;
+	return true;
 }
