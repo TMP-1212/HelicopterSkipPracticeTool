@@ -69,19 +69,19 @@ const state = Object.freeze({
     RESULT: 1,
     WAITING: 2
 });
-var gameState = state.WAITING;
-var fps = 30;
-var frameLength = 1000 / fps;
-var lastTickTime = Date.now();
-var currentTime = Date.now();
-var currentFrame = 1;
-var levelImages = {};
-var keyboardImages = {};
-var imagesLoaded = 0;
-var saveState = 1;
-var displayRestartMessage = true;
-var displayInput = true;
-var lastInput = [0,0,0,0,0,0,0,0]
+let gameState = state.WAITING;
+let fps = 30;
+let frameLength = 1000 / fps;
+let lastTickTime = Date.now();
+let currentTime = Date.now();
+let currentFrame = 1;
+let levelImages = {};
+let keyboardImages = {};
+let imagesLoaded = 0;
+let saveState = 1;
+let displayRestartMessage = true;
+let displayInput = true;
+let lastInput = [0,0,0,0,0,0,0,0]
 
 // prevents keyboard from scrolling
 window.addEventListener('keydown', function(event)
@@ -117,26 +117,12 @@ document.addEventListener('click', function(event)
 
 displayRestartCheckbox.addEventListener('change', function()
 {
-	if(displayRestartCheckbox.checked)
-	{
-		displayRestartMessage = true;
-	}
-	else
-	{
-		displayRestartMessage = false;
-	}
+	displayRestartMessage = displayRestartCheckbox.checked;
 });
 
 displayInputFeedbackCheckbox.addEventListener('change', function()
 {
-	if(displayInputFeedbackCheckbox.checked)
-	{
-		displayInput = true;
-	}
-	else
-	{
-		displayInput = false;
-	}
+	displayInput = displayInputFeedbackCheckbox.checked;
 });
 
 StartGame();
@@ -144,7 +130,7 @@ StartGame();
 function GameLoop()
 {
 	currentTime = Date.now();
-	var timeDifference = currentTime - lastTickTime;
+	let timeDifference = currentTime - lastTickTime;
 	if(timeDifference > frameLength)
 	{
 		lastTickTime = currentTime - (timeDifference % frameLength);
@@ -159,8 +145,8 @@ function Update()
 {		
 	if(document.activeElement === canvas)
 	{	
-		var actualInput = GetInput();
-		var fixedInput = FixInput(actualInput.slice());
+		let actualInput = GetInput();
+		let fixedInput = FixInput(actualInput.slice());
 		switch(gameState)
 		{
 			case state.RUNNING:
@@ -235,12 +221,12 @@ function Draw()
 
 function StartGame()
 {
-	var levelImagePaths = [];
-	for(var i = 1; i <= frames; i++)
+	let levelImagePaths = [];
+	for(let i = 1; i <= frames; i++)
 	{
 		levelImagePaths.push(`level_images/${i}.png`);
 	}
-	var keyboardImagePaths =
+	let keyboardImagePaths =
 	["keyboard_images/Left.png", "keyboard_images/Right.png", "keyboard_images/Up.png", "keyboard_images/Down.png"
 	, "keyboard_images/Space.png", "keyboard_images/Shift.png", "keyboard_images/Ctrl.png", 	"keyboard_images/Z.png"];
 	
@@ -266,13 +252,13 @@ function StartGame()
 		GameLoop();
 		})
 		.catch(err =>
-			{
-				var failedToLoadText = document.createElement("p");
-				failedToLoadText.className = "largeText";
-				failedToLoadText.textContent = "Failed to load. Try refreshing the website.";
-				document.body.insertBefore(failedToLoadText, document.body.firstChild);
-				console.log('image failed to load');
-			});
+		{
+			let failedToLoadText = document.createElement("p");
+			failedToLoadText.className = "largeText";
+			failedToLoadText.textContent = "Failed to load. Try refreshing the website.";
+			document.body.insertBefore(failedToLoadText, document.body.firstChild);
+			console.log('image failed to load');
+		});
 }
 
 function DrawPlayerInput(canvas, canvasContext)
@@ -299,10 +285,9 @@ function DrawCorrectInput(canvas, canvasContext)
 	DrawImage(canvas, canvasContext, keyboardImages[1], canvas.width * 0.967, canvas.height * 0.0578, 0.5, (correctInputs[currentFrame - 1][1]) ? 1 : 0.4);
 }
 
-
 function FixInput(input)
 {
-	var newInput = input;
+	let newInput = input;
 	// if left and right pressed
 	if(newInput[0] && newInput[1])
 	{
@@ -356,7 +341,7 @@ function FixInput(input)
 
 function GetInput()
 {
-	var input = [0, 0, 0, 0, 0, 0, 0, 0];
+	let input = [0, 0, 0, 0, 0, 0, 0, 0];
 	if(keysPressed["ArrowLeft"])
 	{
 		input[0] = 1;
@@ -394,7 +379,7 @@ function GetInput()
 
 function LoadSaveState()
 {
-	var frame = parseInt(document.getElementById("saveState").value, 10);
+	let frame = parseInt(document.getElementById("saveState").value, 10);
 	if(Number.isInteger(frame) && frame > 0 && frame <= frames)
 	{
 		saveState = frame;
@@ -405,7 +390,7 @@ function LoadSaveState()
 
 function SetFramerate()
 {
-	var newFps = parseInt(document.getElementById("framerate").value, 10);
+	let newFps = parseInt(document.getElementById("framerate").value, 10);
 	if(Number.isInteger(newFps) && newFps > 0 && newFps <= 60)
 	{
 	fps = newFps;
@@ -415,12 +400,12 @@ function SetFramerate()
 
 function PreloadImages(imageFilePaths)
 {
-	var promises = [];
+	let promises = [];
 	for(let i = 0; i < imageFilePaths.length; i++)
 	{
 		promises.push(new Promise((resolve, reject) =>
 		{
-			var img = new Image();
+			let img = new Image();
 			img.src = imageFilePaths[i];
 			img.onload = () =>
 			{
